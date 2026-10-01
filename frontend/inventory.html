@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockSphere - View Inventory</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar Navigation -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-cubes"></i>
+      <span>StockSphere</span>
+    </div>
+    <nav>
+      <ul class="nav-menu" id="dynamic-nav-menu">
+        <!-- Dynamic header tabs based on role will be placed here -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Inventory Main Section -->
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>📦 Industrial Inventory Database</h1>
+        <p>Browse, search, and manage industrial products, reorders, and valuations.</p>
+      </div>
+      <button class="btn-primary" onclick="window.location.href='manage-stock.html'">
+        <i class="fas fa-plus"></i> Add New Product
+      </button>
+    </div>
+
+    <!-- Live Search & Filtering Panel -->
+    <div class="action-bar">
+      <!-- Search Input -->
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-bar" class="search-input" placeholder="Search by name, ID, brand, batch...">
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-wrapper">
+        <select id="category-filter" class="filter-select">
+          <option value="">All Categories</option>
+          <option value="Pipe">Pipe</option>
+          <option value="Plate">Plate</option>
+          <option value="Rod">Rod</option>
+          <option value="Beam">Beam</option>
+          <option value="Channel">Channel</option>
+          <option value="Angle">Angle</option>
+          <option value="Valve">Valve</option>
+          <option value="Bearing">Bearing</option>
+          <option value="Fastener">Fastener</option>
+          <option value="Industrial Tool">Industrial Tool</option>
+          <option value="Hydraulic Component">Hydraulic Component</option>
+          <option value="Construction Material">Construction Material</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Database Grid Table -->
+    <div class="table-container" style="overflow-x: auto; width: 100%;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Purchase Price (WAC)</th>
+            <th>Inventory Value</th>
+            <th>Stock Status</th>
+            <th style="width: 70px;">Edit</th>
+            <th style="width: 70px;">Delete</th>
+          </tr>
+        </thead>
+        <tbody id="inventory-table-body">
+          <!-- Filled dynamically by JavaScript -->
+          <tr>
+            <td colspan="9" style="text-align: center; padding: 40px;">
+              <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: var(--primary);"></i>
+              <p style="margin-top: 10px; color: var(--text-muted);">Loading database records...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="navbar" style="border-top: 1px solid var(--border); background-color: var(--white); height: 50px; display: flex; justify-content: center; align-items: center; box-shadow: none; position: static; margin-top: 60px;">
+    <p style="font-size: 13px; color: var(--text-muted);">&copy; 2026 StockSphere. Production-Ready Industrial CRUD Inventory Management.</p>
+  </footer>
+
+  <!-- Central Client JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>

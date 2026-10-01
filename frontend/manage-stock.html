@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockSphere - Manage Stock</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar Navigation -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-cubes"></i>
+      <span>StockSphere</span>
+    </div>
+    <nav>
+      <ul class="nav-menu" id="dynamic-nav-menu">
+        <!-- Dynamic header tabs based on role will be placed here -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Stock Form Main Section -->
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1 id="form-page-heading"><i class="fas fa-plus-circle"></i> Add New Product</h1>
+        <p id="form-page-sub">Add a new product stock to your warehouse inventory</p>
+      </div>
+      <button class="btn-secondary" onclick="window.location.href='inventory.html'">
+        <i class="fas fa-arrow-left"></i> Back to Inventory
+      </button>
+    </div>
+
+    <!-- Product Form Layout -->
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-clipboard-list"></i> Industrial Product Specifications</h2>
+        </div>
+
+        <form id="stock-form">
+          <div class="form-grid">
+            <!-- Product Name -->
+            <div class="form-group span-2">
+              <label for="product-name">Product Name *</label>
+              <input type="text" id="product-name" class="form-control no-icon" placeholder="e.g. MS Plate, Seamless Pipe, Round Bar" required>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <label for="product-category">Category *</label>
+              <select id="product-category" class="form-control no-icon" required style="padding-left: 12px;">
+                <option value="">-- Select Category --</option>
+                <option value="Pipe">Pipe</option>
+                <option value="Plate">Plate</option>
+                <option value="Rod">Rod</option>
+                <option value="Beam">Beam</option>
+                <option value="Channel">Channel</option>
+                <option value="Angle">Angle</option>
+                <option value="Valve">Valve</option>
+                <option value="Bearing">Bearing</option>
+                <option value="Fastener">Fastener</option>
+                <option value="Industrial Tool">Industrial Tool</option>
+                <option value="Hydraulic Component">Hydraulic Component</option>
+                <option value="Construction Material">Construction Material</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="form-group">
+              <label for="product-date">Date *</label>
+              <input type="date" id="product-date" class="form-control no-icon" required>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <label for="product-qty">Quantity *</label>
+              <input type="number" id="product-qty" class="form-control no-icon" min="0" placeholder="e.g. 100" required>
+            </div>
+
+            <!-- Purchase Price (Cost Price) -->
+            <div class="form-group">
+              <label for="product-price">Purchase Price (₹) *</label>
+              <input type="number" id="product-price" class="form-control no-icon" min="0" step="0.01" placeholder="e.g. 15000.00" required>
+            </div>
+
+            <!-- Minimum Stock Level (Reorder Threshold) -->
+            <div class="form-group">
+              <label for="product-min-stock">Minimum Stock Level *</label>
+              <input type="number" id="product-min-stock" class="form-control no-icon" min="0" value="10" placeholder="e.g. 10" required>
+            </div>
+
+            <!-- Brand -->
+            <div class="form-group">
+              <label for="product-brand">Brand</label>
+              <input type="text" id="product-brand" class="form-control no-icon" placeholder="e.g. TATA, SAIL, SKF">
+            </div>
+
+            <!-- Grade -->
+            <div class="form-group">
+              <label for="product-grade">Grade</label>
+              <input type="text" id="product-grade" class="form-control no-icon" placeholder="e.g. SS304, Fe500, Grade 80">
+            </div>
+
+            <!-- Material -->
+            <div class="form-group">
+              <label for="product-material">Material</label>
+              <input type="text" id="product-material" class="form-control no-icon" placeholder="e.g. Carbon Steel, Stainless Steel">
+            </div>
+
+            <!-- Thickness -->
+            <div class="form-group">
+              <label for="product-thickness">Thickness</label>
+              <input type="text" id="product-thickness" class="form-control no-icon" placeholder="e.g. 5mm, 12mm">
+            </div>
+
+            <!-- Size -->
+            <div class="form-group">
+              <label for="product-size">Size / Dimensions</label>
+              <input type="text" id="product-size" class="form-control no-icon" placeholder="e.g. 2 inch, 1000x2000mm">
+            </div>
+
+            <!-- Supplier -->
+            <div class="form-group">
+              <label for="product-supplier">Supplier</label>
+              <input type="text" id="product-supplier" class="form-control no-icon" placeholder="e.g. Industrial Steel Corp">
+            </div>
+
+            <!-- Batch Number -->
+            <div class="form-group">
+              <label for="product-batch-number">Batch Number</label>
+              <input type="text" id="product-batch-number" class="form-control no-icon" placeholder="e.g. BT-98765">
+            </div>
+
+            <!-- Specification -->
+            <div class="form-group span-2">
+              <label for="product-spec">Specification / Description</label>
+              <textarea id="product-spec" class="form-control no-icon" rows="4" placeholder="Enter additional details..." style="resize: vertical; font-family: inherit;"></textarea>
+            </div>
+          </div>
+
+          <!-- Buttons Form Action -->
+          <div class="form-actions">
+            <button type="reset" class="btn-reset">
+              <i class="fas fa-undo"></i> Reset
+            </button>
+            <button type="button" id="btn-add-stock" class="btn-primary">
+              <i class="fas fa-plus"></i> Add Stock
+            </button>
+            <button type="button" id="btn-update-stock" class="btn-primary" style="display: none;">
+              <i class="fas fa-save"></i> Update Stock
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="navbar" style="border-top: 1px solid var(--border); background-color: var(--white); height: 50px; display: flex; justify-content: center; align-items: center; box-shadow: none; position: static; margin-top: 60px;">
+    <p style="font-size: 13px; color: var(--text-muted);">&copy; 2026 StockSphere. Production-Ready Industrial CRUD Inventory Management.</p>
+  </footer>
+
+  <!-- Central Client JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>

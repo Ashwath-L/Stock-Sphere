@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockSphere - Dashboard</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar Navigation -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-cubes"></i>
+      <span>StockSphere</span>
+    </div>
+    <nav>
+      <ul class="nav-menu" id="dynamic-nav-menu">
+        <!-- Dynamic header tabs based on role will be placed here -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Dashboard Main Container -->
+  <main class="container">
+    
+    <!-- User Profile Details Panel -->
+    <div class="profile-panel" id="user-profile-panel">
+      <div class="profile-avatar">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <div class="profile-details">
+        <div class="profile-name">Welcome, <span id="profile-username">-</span></div>
+        <div class="profile-role" id="profile-role">-</div>
+        <div class="profile-login">Last Login: <span id="profile-last-login">-</span></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB 1: DASHBOARD OVERVIEW SECTION
+         ========================================== -->
+    <div id="dashboard-section" class="tab-content active">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>Dashboard Overview</h1>
+          <p>Real-time analytics, KPIs, and quick warehouse controls.</p>
+        </div>
+      </div>
+
+      <!-- Core Stats Widgets Panel -->
+      <section class="stats-grid" style="margin-bottom: 24px;">
+        <!-- Total Products -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Products</span>
+            <span class="stat-value" id="stat-total-products">-</span>
+          </div>
+          <div class="stat-icon total-p">
+            <i class="fas fa-box"></i>
+          </div>
+        </div>
+
+        <!-- In Stock -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">In Stock</span>
+            <span class="stat-value" id="stat-in-stock">-</span>
+          </div>
+          <div class="stat-icon in-stock">
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </div>
+
+        <!-- Low Stock Alerts -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Reorder Required</span>
+            <span class="stat-value" id="stat-low-stock" style="color:var(--danger)">-</span>
+          </div>
+          <div class="stat-icon low-stock">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+        </div>
+
+        <!-- Out of Stock -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Out of Stock</span>
+            <span class="stat-value" id="stat-out-stock">-</span>
+          </div>
+          <div class="stat-icon out-stock">
+            <i class="fas fa-times-circle"></i>
+          </div>
+        </div>
+
+        <!-- Total Transactions -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Transactions</span>
+            <span class="stat-value" id="stat-total-transactions">-</span>
+          </div>
+          <div class="stat-icon total-t">
+            <i class="fas fa-history"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Business KPIs Grid -->
+      <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 15px; color: var(--primary);">
+        <i class="fas fa-sack-dollar"></i> Business Financial KPIs
+      </h2>
+      <section class="stats-grid" style="margin-bottom: 24px;">
+        <!-- Total Revenue -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Revenue</span>
+            <span class="stat-value" id="stat-total-revenue" style="color: var(--secondary)">₹0.00</span>
+          </div>
+          <div class="stat-icon total-t"><i class="fas fa-arrow-up-right-dots"></i></div>
+        </div>
+
+        <!-- Total Cost -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Purchase Cost</span>
+            <span class="stat-value" id="stat-total-purchase-cost" style="color: var(--text-muted)">₹0.00</span>
+          </div>
+          <div class="stat-icon total-p"><i class="fas fa-receipt"></i></div>
+        </div>
+
+        <!-- Total Profit -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Net Profit</span>
+            <span class="stat-value" id="stat-net-profit" style="color: var(--success)">₹0.00</span>
+          </div>
+          <div class="stat-icon in-stock"><i class="fas fa-circle-dollar-to-slot"></i></div>
+        </div>
+
+        <!-- Total Loss -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Net Loss</span>
+            <span class="stat-value" id="stat-net-loss" style="color: var(--danger)">₹0.00</span>
+          </div>
+          <div class="stat-icon out-stock"><i class="fas fa-chart-line-down"></i></div>
+        </div>
+
+        <!-- Profit Margin % -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Profit Margin %</span>
+            <span class="stat-value" id="stat-profit-margin" style="color: #a855f7;">0.00%</span>
+          </div>
+          <div class="stat-icon" style="background-color: #f3e8ff; color: #a855f7;"><i class="fas fa-percent"></i></div>
+        </div>
+      </section>
+
+      <!-- Today's Financial Activity Stats -->
+      <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 15px; color: var(--primary);">
+        <i class="fas fa-calendar-day"></i> Today's Operations Summary
+      </h2>
+      <section class="stats-grid" style="margin-bottom: 40px;">
+        <!-- Today's Sales -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Today's Sales Count</span>
+            <span class="stat-value" id="stat-today-sales">-</span>
+          </div>
+          <div class="stat-icon total-t"><i class="fas fa-shopping-cart"></i></div>
+        </div>
+
+        <!-- Today's Purchases -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Today's Purchases Count</span>
+            <span class="stat-value" id="stat-today-purchases">-</span>
+          </div>
+          <div class="stat-icon in-stock"><i class="fas fa-truck-ramp-box"></i></div>
+        </div>
+
+        <!-- Today's Revenue -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Today's Revenue</span>
+            <span class="stat-value" id="stat-today-revenue">₹0.00</span>
+          </div>
+          <div class="stat-icon total-t"><i class="fas fa-wallet"></i></div>
+        </div>
+
+        <!-- Today's Profit -->
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Today's Net Profit/Loss</span>
+            <span class="stat-value" id="stat-today-profit">₹0.00</span>
+          </div>
+          <div class="stat-icon total-p"><i class="fas fa-calculator"></i></div>
+        </div>
+      </section>
+
+      <!-- Low Stock / Reorder Alerts Box -->
+      <div id="low-stock-alerts-box" class="alert-box-container" style="display: none;">
+        <div class="alert-box-header">
+          <i class="fas fa-bell"></i> ⚠ Reorder Required (Product quantity is at or below Minimum Stock level)
+        </div>
+        <ul class="alert-box-list" id="alert-box-list">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+
+      <!-- Navigation Cards Panel -->
+      <section class="features-grid">
+        <!-- Feature 1: View Inventory -->
+        <div class="feature-card" onclick="window.location.href='inventory.html'">
+          <div class="feature-icon-container">
+            <i class="fas fa-boxes-stacked"></i>
+          </div>
+          <h2>📦 View Inventory</h2>
+          <p>Inspect industrial products list, search, filter, check reorder warnings, and details.</p>
+          <button class="btn-secondary">Open Inventory</button>
+        </div>
+
+        <!-- Feature 2: Manage Stock -->
+        <div class="feature-card" onclick="window.location.href='manage-stock.html'">
+          <div class="feature-icon-container">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+          <h2>➕ Manage Stock</h2>
+          <p>Create new stock products or modify prices, and log automated purchase/sale movements.</p>
+          <button class="btn-secondary">Manage Stock</button>
+        </div>
+
+        <!-- Feature 3: Sales Records -->
+        <div class="feature-card" onclick="window.location.href='sales.html'">
+          <div class="feature-icon-container">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <h2>📊 Sales Records</h2>
+          <p>Log sales orders, record incoming shipments, and browse chronological history logs.</p>
+          <button class="btn-secondary">View Sales Records</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         TAB 2: REPORTS DASHBOARD SECTION
+         ========================================== -->
+    <div id="reports-section" class="tab-content">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>📊 Reports & Analytics Dashboard</h1>
+          <p>Industrial profit/loss margins, stock turnover, and Chart.js graphs.</p>
+        </div>
+      </div>
+
+      <!-- Export Action Controls -->
+      <div class="export-bar">
+        <button id="btn-export-excel" class="btn-export"><i class="fas fa-file-excel"></i> Export to Excel (CSV)</button>
+        <button id="btn-export-pdf" class="btn-export pdf"><i class="fas fa-file-pdf"></i> Print / Save PDF</button>
+      </div>
+
+      <!-- Reports KPI Cards Grid -->
+      <div class="reports-grid" style="margin-bottom: 24px;">
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Inventory Value (Cost)</span>
+            <span class="stat-value" id="report-total-val" style="color: var(--primary)">₹0.00</span>
+          </div>
+          <div class="stat-icon total-p"><i class="fas fa-warehouse"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Business Revenue</span>
+            <span class="stat-value" id="report-total-rev" style="color: var(--secondary)">₹0.00</span>
+          </div>
+          <div class="stat-icon total-t"><i class="fas fa-money-bill-trend-up"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Total Purchases Cost</span>
+            <span class="stat-value" id="report-total-cost" style="color: var(--text-muted)">₹0.00</span>
+          </div>
+          <div class="stat-icon out-stock"><i class="fas fa-money-bill-transfer"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Net Profit</span>
+            <span class="stat-value" id="report-net-profit" style="color: var(--success)">₹0.00</span>
+          </div>
+          <div class="stat-icon in-stock"><i class="fas fa-coins"></i></div>
+        </div>
+      </div>
+
+      <!-- Secondary KPIs Grid (Margin, Best Seller, Turnovers) -->
+      <div class="reports-grid" style="margin-bottom: 40px;">
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Net Profit Margin %</span>
+            <span class="stat-value" id="report-profit-margin" style="color: #a855f7;">0.00%</span>
+          </div>
+          <div class="stat-icon" style="background-color: #f3e8ff; color: #a855f7;"><i class="fas fa-percent"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Best Selling Product</span>
+            <span class="stat-value" id="report-best-selling" style="font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">-</span>
+          </div>
+          <div class="stat-icon total-p"><i class="fas fa-award"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Highest Profit Product</span>
+            <span class="stat-value" id="report-highest-profit" style="font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">-</span>
+          </div>
+          <div class="stat-icon in-stock"><i class="fas fa-sack-dollar"></i></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Stock Turnover Ratio</span>
+            <span class="stat-value" id="report-turnover-ratio" style="color: #06b6d4;">0.00x</span>
+          </div>
+          <div class="stat-icon" style="background-color: #ecfeff; color: #06b6d4;"><i class="fas fa-rotate"></i></div>
+        </div>
+      </div>
+
+      <!-- Advanced Business Milestones Summary -->
+      <div class="card" style="margin-bottom: 40px; padding: 24px;">
+        <div class="card-header" style="border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px;">
+          <h2><i class="fas fa-chart-line"></i> Industrial Milestone Summary</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; font-size: 14px;">
+          <div><strong>Highest Profit Month:</strong> <span id="report-max-profit-month">-</span></div>
+          <div><strong>Least Profitable Month:</strong> <span id="report-min-profit-month">-</span></div>
+          <div><strong>Highest Revenue Month:</strong> <span id="report-max-revenue-month">-</span></div>
+          <div><strong>Highest Selling Day:</strong> <span id="report-max-sales-day">-</span></div>
+          <div><strong>Total Purchase Units:</strong> <span id="report-total-purchase-qty">0</span> units</div>
+          <div><strong>Total Sold Units:</strong> <span id="report-total-sold-qty">0</span> units</div>
+          <div><strong>Current Stock Units:</strong> <span id="report-current-inv-qty">0</span> units</div>
+        </div>
+      </div>
+
+      <!-- CANVAS CHARTS PANEL -->
+      <div class="card-header" style="border-bottom: none; margin-bottom: -10px;">
+        <h2><i class="fas fa-chart-pie"></i> Visual Performance Analytics</h2>
+      </div>
+      <section class="charts-grid">
+        <!-- Chart 1: Revenue vs Cost Comparison -->
+        <div class="chart-card">
+          <h3>Revenue vs Cost (Monthly)</h3>
+          <div class="chart-container-wrapper">
+            <canvas id="chart-rev-vs-cost"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Net Profit Trend -->
+        <div class="chart-card">
+          <h3>Monthly Profit Trend</h3>
+          <div class="chart-container-wrapper">
+            <canvas id="chart-profit-trend"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3: Top Selling & Profitable Products -->
+        <div class="chart-card">
+          <h3>Top 5 Selling vs Profitable Products</h3>
+          <div class="chart-container-wrapper">
+            <canvas id="chart-top-products"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 4: Inventory Value Distribution -->
+        <div class="chart-card">
+          <h3>Inventory Value Distribution</h3>
+          <div class="chart-container-wrapper">
+            <canvas id="chart-inventory-dist"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reorder Low Stock Table -->
+      <div class="layout-split" style="margin-top: 30px;">
+        <div class="table-container" style="overflow-x: auto; grid-column: span 2;">
+          <div class="card-header" style="padding: 20px 20px 0 20px; border-bottom: none; margin-bottom: 0;">
+            <h2 style="font-size: 16px;"><i class="fas fa-triangle-exclamation"></i> Reorder Alerts List</h2>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Reorder Level</th>
+                <th>Alert Status</th>
+              </tr>
+            </thead>
+            <tbody id="report-low-stock-table-body">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB 3: ADMIN MANAGEMENT SECTION (Owner only)
+         ========================================== -->
+    <div id="admin-section" class="tab-content">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>👥 Admin Account Management</h1>
+          <p>Create and reset credentials for Admin warehouse workers.</p>
+        </div>
+      </div>
+
+      <div class="layout-split">
+        <!-- Add Admin Form -->
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fas fa-user-plus"></i> Add New Admin</h2>
+          </div>
+          <form id="admin-form">
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="admin-username">Admin Username *</label>
+              <input type="text" id="admin-username" class="form-control no-icon" placeholder="Enter username" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="admin-password">Password *</label>
+              <input type="password" id="admin-password" class="form-control no-icon" placeholder="Enter password" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 25px;">
+              <label for="admin-confirm-password">Confirm Password *</label>
+              <input type="password" id="admin-confirm-password" class="form-control no-icon" placeholder="Confirm password" required>
+            </div>
+            <div class="form-actions">
+              <button type="reset" class="btn-reset">Reset</button>
+              <button type="submit" class="btn-primary">Create Admin</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Admin list table -->
+        <div class="table-container">
+          <div class="card-header" style="padding: 20px 20px 0 20px; border-bottom: none; margin-bottom: 0;">
+            <h2 style="font-size: 16px;"><i class="fas fa-users-cog"></i> Active Admin Accounts</h2>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Created Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB 4: ACTIVITY LOG SECTION (Owner only)
+         ========================================== -->
+    <div id="activity-section" class="tab-content">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>📜 System Activity Log</h1>
+          <p>Searchable historical audit trails of system operations.</p>
+        </div>
+      </div>
+
+      <!-- Live Search logs -->
+      <div class="action-bar">
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="log-search" class="search-input" placeholder="Search activity logs by action, username, product...">
+        </div>
+      </div>
+
+      <!-- Logs Grid table -->
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 180px;">Time / Date</th>
+              <th style="width: 110px;">Username</th>
+              <th style="width: 90px;">Role</th>
+              <th style="width: 140px;">Action</th>
+              <th style="width: 160px;">Product Name</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="activity-table-body">
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="navbar" style="border-top: 1px solid var(--border); background-color: var(--white); height: 50px; display: flex; justify-content: center; align-items: center; box-shadow: none; position: static; margin-top: 60px;">
+    <p style="font-size: 13px; color: var(--text-muted);">&copy; 2026 StockSphere. Production-Ready Industrial CRUD Inventory Management.</p>
+  </footer>
+
+  <!-- Central Client JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
